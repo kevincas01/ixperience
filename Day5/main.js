@@ -22,8 +22,10 @@ class UserInterface {
     }
   
     addTasks(event) {
+      if(this.taskInput.value){
+
       event.preventDefault();
-  
+      
       const task = new Task(
         this.taskInput.value,
         "Not Completed"
@@ -33,6 +35,7 @@ class UserInterface {
       this.populateTable();
   
       this.taskInput.value = '';
+      }
     }
   
     populateTable() {
