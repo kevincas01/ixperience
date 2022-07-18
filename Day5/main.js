@@ -5,9 +5,6 @@ class Task{
     }
 }
 
-let test=new Task("clean","yes","delete")
-
-
 class UserInterface {
     constructor() {
       this.taskInput = document.getElementById('task-input');
@@ -25,7 +22,7 @@ class UserInterface {
       if(this.taskInput.value){
 
       event.preventDefault();
-      
+
       const task = new Task(
         this.taskInput.value,
         "Not Completed"
