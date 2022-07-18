@@ -1,0 +1,33 @@
+body{
+    background-color: black;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(49, 48, 48);
+    padding:10px;
+}
+.box{
+    display: flex;
+    height: 200px;
+    width:calc(33.33% - 10px);
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+}
+#blue{
+    background-color: blue;
+}
+#yellow{
+    background-color: yellow;
+}
+#red{
+    background-color: red;
+}
+#green{
+    background-color: green;
+}
+#pink{
+    background-color: rgb(202, 40, 181);
+    width:calc(66.66% - 10px);
+}

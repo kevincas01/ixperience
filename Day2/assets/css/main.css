@@ -1,0 +1,76 @@
+html,body {
+    padding: 0;
+    height: 100%;
+    margin: 0px;
+    
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color:darkgrey;
+}
+
+h1{
+    text-align: center;
+}
+
+header {
+    background-color: rgb(37, 50, 88);
+    flex: 0 0 40px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 50px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.section{
+    padding-left: 20px;
+    
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    width: 100vw;
+    
+    }
+
+.interests{
+    background-color: rgb(37, 50, 88);
+    color: white;
+    padding-bottom: 30px;
+}
+.padding-sec{
+
+    padding-top: 65px;
+    padding-bottom: 65px;
+    
+}
+
+hr {
+    background-color: black;
+    height: 5px;
+    width: 100%;
+    border: 0;
+}
+
+#button{
+    background-color: rgb(37, 50, 88);
+    height:50px;
+    width:100px;
+    color: white;
+    border-radius: 10px;}
+
+
+.intro{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.carousel-it{
+    margin: auto;
+    width: 40%;
+    background-color: rgb(37, 50, 88);
+}
+.carousel-img{
+    height:300px;
+}
