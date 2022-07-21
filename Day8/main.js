@@ -1,13 +1,16 @@
-const draw1 = "http://deckofcardsapi.com/api/deck/new/draw/?count=1";
+var deckId=""
 
-const draw2 = "http://deckofcardsapi.com/api/deck/new/draw/?count=2";
+var draw1 = "http://deckofcardsapi.com/api/deck/<<"+deckId+">>/draw/?count=1";
+var draw2 = "http://deckofcardsapi.com/api/deck/<<"+deckId+">>/draw/?count=2";
+
 
 async function fetchCards(num) {
-  const response = await fetch(draw1, {
-    method: "GET",
-  });
-  return response.json();
-}
+    const response = await fetch(draw1, {
+      method: "GET",
+    });
+    return response.json();
+  }
+  
 
 var yourTotal = 0;
 var dealerTotal = 0;
@@ -15,20 +18,23 @@ var dealerTotal = 0;
 var pStand = false;
 var dStand = false;
 
+var cardsLeft=0;
+
 function printCards(cards, player) {
   let drawCards = cards.cards;
-  for (let i = 0; i < drawCards.length; i++) {
+  console.log(cards);
     const cardImg = document.createElement("img");
-    cardImg.src = drawCards[i].image;
+    cardImg.src = drawCards[0].image;
     cardImg.classList.add("cards");
 
     if (player === "Player") {
       const cardBody = document.getElementById("playerBody");
       cardBody.append(cardImg);
 
-      if (parseInt(drawCards[i].value)) {
-        yourTotal += parseInt(drawCards[i].value);
-      } else if (drawCards[i].value === "ACE") {
+
+      if (parseInt(drawCards[0].value)) {
+        yourTotal += parseInt(drawCards[0].value);
+      } else if (drawCards[0].value === "ACE") {
         yourTotal += 11;
       } else {
         yourTotal += 10;
@@ -41,9 +47,9 @@ function printCards(cards, player) {
       const cardBody = document.getElementById("dealerBody");
       cardBody.append(cardImg);
 
-      if (parseInt(drawCards[i].value)) {
-        dealerTotal += parseInt(drawCards[i].value);
-      } else if (drawCards[i].value === "ACE") {
+      if (parseInt(drawCards[0].value)) {
+        dealerTotal += parseInt(drawCards[0].value);
+      } else if (drawCards[0].value === "ACE") {
         dealerTotal += 11;
       } else {
         dealerTotal += 10;
@@ -53,28 +59,56 @@ function printCards(cards, player) {
       }
       document.getElementById("dealerScore").innerHTML = dealerTotal;
     }
-  }
+    cardsLeft=cards.remaining
+  
 }
 
 async function dealerHit() {
   try {
     const posts = await fetchCards(1);
-
+    
     printCards(posts, "Dealer");
   } catch (err) {
     console.log(err);
   }
 }
 
-async function playerHit() {
+async function playerHit(num) {
   try {
-    const posts = await fetchCards(1);
+    const posts = await fetchCards(num);
 
     printCards(posts, "Player");
   } catch (err) {
     console.log(err);
   }
 }
+
+const deckUrl="http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
+
+async function fetchDeck() {
+    const response = await fetch(deckUrl, {
+      method: "GET",
+    });
+    return response.json();
+  }
+
+async function drawDeck() {
+    try {
+      const posts = await fetchDeck();
+        
+        if(cardsLeft<15){
+        deckId=posts.deck_id;
+        draw1="http://deckofcardsapi.com/api/deck/"+deckId+"/draw/?count=1";
+        }
+        
+
+        playGame();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
 
 function playGame() {
   document.getElementById("results").style.display = "none";
