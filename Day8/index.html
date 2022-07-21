@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch Example</title>
+    <link rel="stylesheet" href="main.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <script src="./main.js"></script>
+    <div class="container mt-4">
+      <div
+        class="card card-body text-center"
+        style="background-color: rgba(22, 87, 22, 0.986)"
+      >
+
+        <h1>Lets play BlackJack</h1>
+        <hr />
+
+        <div id="playGame">
+          <button
+            onClick="playGame()"
+            type="button"
+            class="btn btn-secondary mx-5"
+            id="playBtn"
+          >
+            Play
+          </button>
+          <h2>Rules</h2>
+          <ul style="font-size: 20px;">
+              <li>The player begins first. The dealer follows after the player decides to stand with his hand</li>
+              <li>A hit will add a card to your hand</li>
+              <li>A stand means you are content with your cards and do not want to add anymore cards. </li>
+          </ul>
+
+        </div>
+        <div id="gameStart" style="display: none">
+          
+          <div id="dealerBody"></div>
+          <div>
+            <button
+              onClick="dealerHit()"
+              style="display: inline"
+              type="button"
+              class="btn btn-secondary px-5 mx-3"
+            >
+              Hit
+            </button>
+            
+            <button
+                onClick="dealerStand()"
+              style="display: inline"
+              type="button"
+              class="btn btn-secondary px-5 mx-3"
+            >
+              Stand
+            </button>
+          </div>
+          <h2 id="dealerTurn">Dealer's hand--Score:<span id="dealerScore"></span></h2>
+          <h2 id="playerTurn">Your hand--Score:<span id="yourScore"></span></h2>
+          <div>
+            <button
+              onClick="playerHit()"
+              style="display: inline"
+              type="button"
+              class="btn btn-secondary px-5 mx-3"
+            >
+              Hit
+            </button>
+            
+            <button
+                onClick="playerStand()"
+              style="display: inline"
+              type="button"
+              class="btn btn-secondary px-5 mx-3"
+            >
+              Stand
+            </button>
+          </div>
+            
+          <div id="playerBody"></div>
+          
+        </div>
+        <div style="color:red"id="results">
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <div style="height: 100px" id="memeBody"></div>
+  </body>
+</html>
