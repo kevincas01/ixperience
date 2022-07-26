@@ -1,30 +1,70 @@
 import "bootstrap/dist/css/bootstrap.css";
 import TaskInput from "./TaskInput";
 import TaskTable from  './TaskTable';
-import {useState} from 'react'
+
+import {useEffect, useState} from 'react'
+
+import service from "./firebase/task.service"
 function App() {
 
   const [tasks, setTasks]=useState([]);
 
-  function onTaskSubmit(task){
-    const newTasks=[...tasks,task];
-    setTasks(newTasks);
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  async function fetchTasks() {
+    try {
+      const tasks = await service.readTasks();
+      setTasks(tasks);
+    } catch(err) {
+      console.log(err);
+    }
   }
 
-  function onCompleteUpdate(task){
-    const newTasks=tasks.map((t)=>{
-        return task.id===t.id ? task : t;
-    });
-
+  async function onTaskSubmit(task){
+    try{
+      task=await service.createTask(task)
+      const newTasks=[...tasks,task];
     setTasks(newTasks);
+    }
+    catch(err){
+      console.log(err);
+    }
+    
   }
 
-  function onRemoveTask(task){
+  async function onCompleteUpdate(task){
+
+    try {
+      task = await service.updateTask(task);
+
+      console.log(tasks)
+      const newTasks = tasks.map((t) => {
+        return t.id === task.id ? task : t;
+      });
+      setTasks(newTasks);
+    } catch(err) {
+      console.log(err);
+    }
+    
+  }
+
+  async function onRemoveTask(task){
+
+    try{
+      await service.removeTask(task);
+
       const newTasks=tasks.filter((t)=>{
         return task.id!==t.id;
       });
 
       setTasks(newTasks);
+    }
+    catch(err){
+      console.log(err);
+    }
+      
   }
 
   return (

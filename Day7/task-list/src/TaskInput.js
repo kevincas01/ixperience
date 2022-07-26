@@ -6,7 +6,7 @@ export default function TaskInput(props) {
     const [taskName,setTaskName]=useState("");
     function submitTask(event){
         event.preventDefault();
-        const task= new Task(taskName, false,(new Date()).getTime());
+        const task= new Task(taskName, false, 0);
         props.onTaskSubmit(task);
 
         setTaskName("");

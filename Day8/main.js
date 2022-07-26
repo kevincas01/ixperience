@@ -25,7 +25,7 @@ function printCards(cards, player) {
   console.log(cards);
     const cardImg = document.createElement("img");
     cardImg.src = drawCards[0].image;
-    cardImg.classList.add("cards");
+
 
     if (player === "Player") {
       const cardBody = document.getElementById("playerBody");
